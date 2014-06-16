@@ -13,7 +13,7 @@ import request.task.DeleteDocumentTask;
 import request.task.GetDocumentMetadataTask;
 import request.task.GetDocumentTask;
 
-public class HazelcastManager
+public class HazelcastClientManager
 {
 	public static HazelcastInstance getInstance()
 	{

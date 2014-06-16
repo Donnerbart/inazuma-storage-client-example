@@ -15,7 +15,7 @@ public class InazumaStorageClientManager
 	public static CountDownLatch start()
 	{
 		// Get Hazelcast instance
-		final HazelcastInstance hz = HazelcastManager.getInstance();
+		final HazelcastInstance hz = HazelcastClientManager.getInstance();
 
 		// Start JMX agent
 		new JMXAgent("de.donnerbart", "InazumaStorageClient");
