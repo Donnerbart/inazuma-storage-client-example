@@ -48,7 +48,7 @@ public class Main
 		InazumaStorageClient.shutdown();
 
 		// Wait for shutdown hook
-		System.out.println("Inazuma-Storage-Client is running...");
+		System.out.println("Shutting down Inazuma-Storage-Client...");
 		try
 		{
 			latch.await();
