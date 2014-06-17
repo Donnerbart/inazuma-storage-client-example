@@ -12,18 +12,19 @@ public class Main
 {
 	public static void main(final String[] args)
 	{
+		System.out.println("Running for " + TimeUnit.MILLISECONDS.toSeconds(Config.RUNTIME) + " seconds...\n");
+
+		// Start Inazuma-Storage client
 		final CountDownLatch latch = InazumaStorageClient.start();
 
 		// Configure thread pool
-		System.out.println("Running for " + Config.RUNTIME + " ms...");
-
 		final ScheduledExecutorService threadPoolCreation = Executors.newScheduledThreadPool(10, new NamedThreadFactory("MailCreation"));
 		for (int i = 0; i < Config.CREATION_JOBS; ++i)
 		{
 			threadPoolCreation.submit(new CreateRandomMails(threadPoolCreation));
 		}
 
-		// Wait until runtime is over
+		// Wait until configured runtime is over
 		try
 		{
 			TimeUnit.MILLISECONDS.sleep(Config.RUNTIME);
@@ -44,11 +45,9 @@ public class Main
 		}
 		System.out.println("Done!\n");
 
-		// Shutdown of Inazuma-Storage-Client
+		// Shutdown of Inazuma-Storage client
+		System.out.println("Shutting down Inazuma-Storage client...\n");
 		InazumaStorageClient.shutdown();
-
-		// Wait for shutdown hook
-		System.out.println("Shutting down Inazuma-Storage-Client...");
 		try
 		{
 			latch.await();
@@ -57,8 +56,8 @@ public class Main
 		{
 			e.printStackTrace();
 		}
+		System.out.println("Inazuma-Storage client is shut down!\n");
 
-		System.out.println("Inazuma-Storage-Client is shut down!");
 		System.exit(0);
 	}
 }
