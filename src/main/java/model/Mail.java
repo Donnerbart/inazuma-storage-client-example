@@ -12,7 +12,7 @@ public abstract class Mail
 		this.senderID = senderID;
 		this.receiverID = receiverID;
 	}
-	
+
 	public MailType getMailType()
 	{
 		return mailType;

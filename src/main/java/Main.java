@@ -1,7 +1,7 @@
-import worker.CreateRandomMails;
 import de.donnerbart.inazuma.storage.base.util.NamedThreadFactory;
 import de.donnerbart.inazuma.storage.client.InazumaStorageClient;
 import util.Config;
+import worker.CreateRandomMails;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
