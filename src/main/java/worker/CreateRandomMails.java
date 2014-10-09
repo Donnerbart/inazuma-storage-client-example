@@ -20,6 +20,8 @@ public class CreateRandomMails implements Runnable
 	private static final MailType[] mailTypes = MailType.values();
 	private static final Random generator = new Random();
 
+	private final RequestController requestController = RequestController.getInstance();
+
 	private final ScheduledExecutorService threadPool;
 
 	public CreateRandomMails(final ScheduledExecutorService threadPool)
@@ -65,7 +67,12 @@ public class CreateRandomMails implements Runnable
 		}
 
 		// Put mail on storage queue
-		RequestController.getInstance().addDocument(String.valueOf(receiverID), UUID.randomUUID().toString(), gson.toJson(mail), TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+		requestController.addDocument(
+				String.valueOf(receiverID),
+				UUID.randomUUID().toString(),
+				gson.toJson(mail),
+				TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
+		);
 
 		if (!threadPool.isShutdown() && !threadPool.isTerminated())
 		{
